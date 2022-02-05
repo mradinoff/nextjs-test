@@ -1,3 +1,10 @@
+import Asparagus from "../docs/assets/asparagus.jpg";
+import Breakfast from "../docs/assets/breakfast.jpg";
+import Cocktail from "../docs/assets/cocktail.jpg";
+import Fruit from "../docs/assets/fruit.jpg";
+import Soil from "../docs/assets/soil.jpg";
+import Seafood from "../docs/assets/seafood.jpg";
+
 const homeData = {
   mosaicContent: {
     heading: "Answer your body's needs",
@@ -6,16 +13,16 @@ const homeData = {
     subheading: "Be mindful",
     boldCopy:
       "Sourcing local or organic food is a good way to start being more mindful about what you're cooking and eating.",
-    largeImage: {
+    largeMedia: {
       alt: "",
-      src: ""
+      src: Soil.src
     },
-    smallImages: [
+    smallMedia: [
       {
         alt: "",
-        src: ""
+        src: Fruit.src
       },
-      { alt: "", src: "" }
+      { alt: "", src: Asparagus.src }
     ]
   }
 };

@@ -2,6 +2,7 @@ import { css, Global } from "@emotion/react";
 import type { AppProps } from "next/app";
 import typography from "../styles/design-tokens/typography";
 import variables from "../styles/design-tokens/variables";
+import colors from "../styles/design-tokens/colors";
 import bodyModule from "../styles/utilities/body-module";
 import container from "../styles/utilities/container";
 
@@ -24,6 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => (
           position: relative;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
+          background-color: ${colors.black}
         }
         * {
           box-sizing: border-box;

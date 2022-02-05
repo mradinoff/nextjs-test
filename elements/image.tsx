@@ -1,6 +1,5 @@
-import Image, { ImageLoaderProps } from "next/image";
+import Image from "next/image";
 import styled from "@emotion/styled";
-import { PropsWithChildren } from "react";
 
 export interface ImageFileProps {
   [key: string]: any;
@@ -15,8 +14,7 @@ export type ImageElemProps = {
 
 const ImageContainer = styled("div")`
   position: relative;
-  border-radius: 20px;
-  overflow: hidden;
+  height: 100%;
 
   &:before {
     display: block;
@@ -26,12 +24,16 @@ const ImageContainer = styled("div")`
 
   &.--landscape {
     &:before {
-      padding-top: calc((5 / 8) * 100%);
+      padding-top: calc((3 / 4) * 100%);
     }
   }
 
   &.--square {
     padding-top: 100%;
+  }
+
+  &.--portrait {
+    padding-top: calc((25 / 16) * 100%);
   }
 
   & > .e-image {
@@ -43,12 +45,7 @@ const ImageContainer = styled("div")`
   }
 `;
 
-const ImageElem: React.FC<ImageElemProps> = ({
-  image,
-  className,
-  blur,
-  contain = false
-}) => {
+const ImageElem: React.FC<ImageElemProps> = ({ image, className }) => {
   const { src, alt } = image;
   if (src) {
     return (
@@ -60,9 +57,9 @@ const ImageElem: React.FC<ImageElemProps> = ({
           src={src}
           alt={alt}
           layout="fill"
-          objectFit={contain ? "contain" : "cover"}
+          objectFit="cover"
           blurDataURL={src}
-          placeholder={blur ? "blur" : "empty"}
+          placeholder="blur"
         />
       </ImageContainer>
     );

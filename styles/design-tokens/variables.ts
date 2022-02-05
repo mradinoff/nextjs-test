@@ -1,6 +1,6 @@
 const variables = {
-  maxWidth: "1200px",
-  gridGap: "32px",
+  maxWidth: "1240px",
+  gridGap: "24px",
   large: "1200px",
   medium: "1000px",
   smlMedium: "900px",
