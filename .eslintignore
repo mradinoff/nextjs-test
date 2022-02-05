@@ -1,0 +1,6 @@
+package.json
+yarn-lock.json
+.next
+public
+node_modules
+docs
