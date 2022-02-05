@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState, MouseEvent } from "react";
 import Fader from "../elements/fader";
 import ImageElem, { ImageFileProps } from "../elements/image";
+import Modal from "../elements/modal";
 import colors from "../styles/design-tokens/colors";
 import variables from "../styles/design-tokens/variables";
 
@@ -81,6 +82,24 @@ const MosaicContentContainer = styled("section")`
       }
     }
   }
+
+  & .m-mosaic-content__click {
+    & .e-image {
+      transition: 0.4s transform ease-in;
+
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      & .e-image {
+        transform: scale(1.03);
+        cursor: nwse-resize;
+      }
+    }
+  }
 `;
 
 const MosaicContent: React.FC<MosiacContentProps> = ({
@@ -90,33 +109,64 @@ const MosaicContent: React.FC<MosiacContentProps> = ({
   boldCopy,
   smallMedia,
   largeMedia
-}) => (
-  <MosaicContentContainer className="m-mosaic-content --container --body-module">
-    <Fader variant="scale" className="m-mosaic-content__large-wrapper">
-      <ImageElem image={largeMedia} className="--fill" />
-    </Fader>
-    {smallMedia.map((media, i) => (
-      <Fader
-        variant="scale"
-        className="m-mosaic-content__small-wrapper"
-        key={i}
-        delay={i + 2}
-      >
-        <ImageElem image={media} className="--fill" />
-      </Fader>
-    ))}
-    <div className="m-mosaic-content__content-wrapper">
-      <h2 className="m-mosaic-content__heading h3">{heading}</h2>
-      <hr className="m-mosaic-content__break" />
-      <p className="m-mosaic-content__copy body-regular">{copy}</p>
-      {subheading && (
-        <h3 className="m-mosaic-content__subheading h4">{subheading}</h3>
-      )}
-      {boldCopy && (
-        <h3 className="m-mosaic-content__bold-copy body-bold">{boldCopy}</h3>
-      )}
-    </div>
-  </MosaicContentContainer>
-);
+}) => {
+  const [modalImage, setModalImage] = useState({ src: null, alt: null });
+  const modalClose = () => {
+    setModalImage({ src: null, alt: null });
+  };
 
+  const imageClick = (
+    e: MouseEvent<HTMLAnchorElement>,
+    image: ImageFileProps
+  ) => {
+    e.preventDefault();
+    setModalImage({ src: image.src, alt: image.alt });
+  };
+
+  return (
+    <MosaicContentContainer className="m-mosaic-content --container --body-module">
+      <Fader variant="scale" className="m-mosaic-content__large-wrapper">
+        <a
+          href=""
+          className="m-mosaic-content__click"
+          onClick={e => imageClick(e, largeMedia)}
+        >
+          <ImageElem image={largeMedia} className="--fill" />
+        </a>
+      </Fader>
+      {smallMedia.map((media, i) => (
+        <Fader
+          variant="scale"
+          className="m-mosaic-content__small-wrapper"
+          key={i}
+          delay={i + 2}
+        >
+          <a
+            href=""
+            className="m-mosaic-content__click"
+            onClick={e => imageClick(e, media)}
+          >
+            <ImageElem image={media} className="--fill" />
+          </a>
+        </Fader>
+      ))}
+      <div className="m-mosaic-content__content-wrapper">
+        <h2 className="m-mosaic-content__heading h3">{heading}</h2>
+        <hr className="m-mosaic-content__break" />
+        <p className="m-mosaic-content__copy body-regular">{copy}</p>
+        {subheading && (
+          <h3 className="m-mosaic-content__subheading h4">{subheading}</h3>
+        )}
+        {boldCopy && (
+          <h3 className="m-mosaic-content__bold-copy body-bold">{boldCopy}</h3>
+        )}
+      </div>
+      {modalImage?.src && (
+        <Modal handleClose={modalClose}>
+          <ImageElem image={modalImage} className="--landscape" contain />
+        </Modal>
+      )}
+    </MosaicContentContainer>
+  );
+};
 export default MosaicContent;

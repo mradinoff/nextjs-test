@@ -8,7 +8,6 @@ export interface ImageFileProps {
 export type ImageElemProps = {
   image: ImageFileProps;
   className?: string;
-  blur?: boolean;
   contain?: boolean;
 };
 
@@ -29,7 +28,9 @@ const ImageContainer = styled("div")`
   }
 
   &.--square {
-    padding-top: 100%;
+    &:before {
+      padding-top: 100%;
+    }
   }
 
   &.-fill {
@@ -37,7 +38,9 @@ const ImageContainer = styled("div")`
   }
 
   &.--portrait {
-    padding-top: calc((25 / 16) * 100%);
+    &:before {
+      padding-top: calc((25 / 16) * 100%);
+    }
   }
 
   & > .e-image {
@@ -46,10 +49,15 @@ const ImageContainer = styled("div")`
     right: 0;
     bottom: 0;
     left: 0;
+    outline: none !important;
   }
 `;
 
-const ImageElem: React.FC<ImageElemProps> = ({ image, className }) => {
+const ImageElem: React.FC<ImageElemProps> = ({
+  image,
+  className,
+  contain = false
+}) => {
   const { src, alt } = image;
   if (src) {
     return (
@@ -61,7 +69,7 @@ const ImageElem: React.FC<ImageElemProps> = ({ image, className }) => {
           src={src}
           alt={alt}
           layout="fill"
-          objectFit="cover"
+          objectFit={contain ? "contain" : "cover"}
           blurDataURL={src}
           placeholder="blur"
         />

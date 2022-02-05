@@ -7,13 +7,15 @@ type FaderProps = {
   className?: string;
   variant?: string;
   delay?: number;
+  exit?: boolean;
 };
 
 const Fader: React.FC<FaderProps> = ({
   children,
   className,
   variant = "fade",
-  delay = 0
+  delay = 0,
+  exit = false
 }) => {
   const fadeInVariant = {
     hidden: { opacity: 0, y: 150 },
@@ -44,7 +46,7 @@ const Fader: React.FC<FaderProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.4,
         delay: delay * 0.1
       }
     }
@@ -56,14 +58,15 @@ const Fader: React.FC<FaderProps> = ({
   const [loaded, setLoaded] = useState(true);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !exit) {
       controls.start("visible");
       setLoaded(true);
-    }
-    if (!inView && !loaded) {
+    } else if (!inView && !loaded) {
+      controls.start("hidden");
+    } else if (exit) {
       controls.start("hidden");
     }
-  }, [controls, inView]);
+  }, [controls, inView, exit]);
 
   let usedVariant;
   if (variant === "scale") {
