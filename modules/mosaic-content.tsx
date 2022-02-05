@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import Fader from "../elements/fader";
 import ImageElem, { ImageFileProps } from "../elements/image";
 import colors from "../styles/design-tokens/colors";
 import variables from "../styles/design-tokens/variables";
@@ -19,20 +20,39 @@ const MosaicContentContainer = styled("section")`
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr 1fr;
 
+  @media (max-width: ${variables.medium}) {
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
   & > .m-mosaic-content__large-wrapper {
     grid-column: 1 / span 4;
     grid-row: 1 / span 2;
+
+    @media (max-width: ${variables.medium}) {
+      grid-column: 1 / span 3;
+      grid-row: span 2;
+    }
   }
 
   & > .m-mosaic-content__small-wrapper {
     grid-column: 5 / span 4;
     grid-row: span 1;
     position: relative;
+
+    @media (max-width: ${variables.medium}) {
+      grid-column: span 6;
+      grid-row: 3;
+    }
   }
 
   & > .m-mosaic-content__content-wrapper {
     grid-column: 9 / span 4;
     grid-row: 1 / span 2;
+
+    @media (max-width: ${variables.medium}) {
+      grid-column: 4 / span 9;
+      grid-row: span 2;
+    }
 
     & > .m-mosaic-content__heading {
       margin-bottom: 10px;
@@ -55,6 +75,10 @@ const MosaicContentContainer = styled("section")`
     }
     & > .m-mosaic-content__bold-copy {
       margin-bottom: 80px;
+
+      @media (max-width: ${variables.medium}) {
+        margin-bottom: 30px;
+      }
     }
   }
 `;
@@ -68,13 +92,18 @@ const MosaicContent: React.FC<MosiacContentProps> = ({
   largeMedia
 }) => (
   <MosaicContentContainer className="m-mosaic-content --container --body-module">
-    <div className="m-mosaic-content__large-wrapper">
-      <ImageElem image={largeMedia} className="portrait" />
-    </div>
+    <Fader variant="scale" className="m-mosaic-content__large-wrapper">
+      <ImageElem image={largeMedia} className="--fill" />
+    </Fader>
     {smallMedia.map((media, i) => (
-      <div className="m-mosaic-content__small-wrapper" key={i}>
-        <ImageElem image={media} className="landscape" />
-      </div>
+      <Fader
+        variant="scale"
+        className="m-mosaic-content__small-wrapper"
+        key={i}
+        delay={i + 2}
+      >
+        <ImageElem image={media} className="--fill" />
+      </Fader>
     ))}
     <div className="m-mosaic-content__content-wrapper">
       <h2 className="m-mosaic-content__heading h3">{heading}</h2>

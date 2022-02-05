@@ -28,7 +28,7 @@ const Fader: React.FC<FaderProps> = ({
   };
 
   const scaleVariant = {
-    hidden: { scale: 0.9 },
+    hidden: { scale: 0.95 },
     visible: {
       scale: 1,
       opacity: 1,

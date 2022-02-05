@@ -32,6 +32,10 @@ const ImageContainer = styled("div")`
     padding-top: 100%;
   }
 
+  &.-fill {
+    height: 100%;
+  }
+
   &.--portrait {
     padding-top: calc((25 / 16) * 100%);
   }
