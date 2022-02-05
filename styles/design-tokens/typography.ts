@@ -39,6 +39,7 @@ h4,
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.75;
+  letter-spacing: 0;
 }
 
 h5,
@@ -46,6 +47,7 @@ h5,
   font-size: 1.6rem;
   font-weight: 600;
   line-height: 1.75;
+  letter-spacing: 0;
 }
 
 p,
@@ -53,25 +55,29 @@ p,
   font-size: 1.8rem;
   font-weight: 300;
   line-height: 1.6;
+  letter-spacing: 0;
 }
 
 .body-bold {
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.6;
+  letter-spacing: 0;
 }
 
 .body-small {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.6;
-  color: var(--grey);
+  color: ${colors.ghost};
+  letter-spacing: 0;
 }
 
 .e-link {
   font-size: 1.6rem;
   font-weight: 600;
   line-height: 1.6;
+  letter-spacing: 0;
 }
 `;
 
