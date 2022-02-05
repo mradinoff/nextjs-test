@@ -30,7 +30,7 @@ const MosaicContentContainer = styled("section")`
     grid-row: 1 / span 2;
 
     @media (max-width: ${variables.medium}) {
-      grid-column: 1 / span 3;
+      grid-column: 1 / span 5;
       grid-row: span 2;
     }
   }
@@ -51,7 +51,7 @@ const MosaicContentContainer = styled("section")`
     grid-row: 1 / span 2;
 
     @media (max-width: ${variables.medium}) {
-      grid-column: 4 / span 9;
+      grid-column: 6 / span 7;
       grid-row: span 2;
     }
 
