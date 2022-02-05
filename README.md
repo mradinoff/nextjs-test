@@ -40,6 +40,13 @@ We are looking for your ability to bring life to static designs. During that pro
 - **Git:** Bonus points for submission on a github account showing multiple commits.
 - **Quality:** Production-grade build and precision.
 
+## Built in
+
+- NextJS
+- @emotion
+- Typescript
+- Framer Motion
+
 ## Running
 
 - Run `nvm use` to run correct node version.
